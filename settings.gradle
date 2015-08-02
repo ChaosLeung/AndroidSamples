@@ -1,0 +1,1 @@
+include ':SimpleBluetoothGatt', ':NotiySideChannel', ':SignatureInfo', ':GlassSDKDemos', ':NotificationListener', ':packageresolver', ':MessagePack', ':SmaliDemos', ':lib', ':AndroidJarDemo', ':InstallerTester'
