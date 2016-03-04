@@ -4,12 +4,12 @@ import proguard.gradle.ProGuardTask
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "org.chaos.demo.jar"
-        minSdkVersion 22
+        minSdkVersion 19
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -27,7 +27,7 @@ dependencies {
 }
 
 //dependsOn 可根据实际需要增加或更改
-task buildJar(dependsOn: ['compileReleaseJava'], type: Jar) {
+task buildJar(dependsOn: ['compileReleaseJavaWithJavac'], type: Jar) {
 
     appendix = "demo"
     baseName = "androidJar"
@@ -47,10 +47,10 @@ task buildJar(dependsOn: ['compileReleaseJava'], type: Jar) {
     //去除路径集下部分的资源
 //    exclude "org/chaos/demo/jar/MainActivity.class"
 //    exclude "org/chaos/demo/jar/MainActivity\$*.class"
-    exclude "org/chaos/demo/jar/BuildConfig.class"
-    exclude "org/chaos/demo/jar/BuildConfig\$*.class"
-    exclude "**/R.class"
-    exclude "**/R\$*.class"
+//    exclude "org/chaos/demo/jar/BuildConfig.class"
+//    exclude "org/chaos/demo/jar/BuildConfig\$*.class"
+//    exclude "**/R.class"
+//    exclude "**/R\$*.class"
 
     //只导入资源路径集下的部分资源
     include "org/chaos/demo/jar/**/*.class"
