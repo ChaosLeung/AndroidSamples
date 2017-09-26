@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.texchi.demos.launchmode"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".LaunchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".DefaultSingleTask"
+                  android:launchMode="singleTask" />
+
+        <activity android:name=".DefaultSingleInstance"
+                  android:launchMode="singleInstance" />
+
+        <activity android:name=".DefaultSingleTop"
+                  android:launchMode="singleTop" />
+
+        <activity android:name=".DefaultStandard"
+                  android:launchMode="standard" />
+
+        <activity android:name=".RemoteSingleTask"
+                  android:launchMode="singleTask"
+                  android:process=":remote" />
+
+        <activity android:name=".RemoteSingleInstance"
+                  android:launchMode="singleInstance"
+                  android:process=":remote" />
+
+        <activity android:name=".RemoteSingleTop"
+                  android:launchMode="singleTop"
+                  android:process=":remote" />
+
+        <activity android:name=".RemoteStandard"
+                  android:launchMode="standard"
+                  android:process=":remote" />
+
+        <activity android:name=".AffinitySingleTask"
+                  android:launchMode="singleTask"
+                  android:taskAffinity=".two" />
+
+        <activity android:name=".AffinitySingleInstance"
+                  android:launchMode="singleInstance"
+                  android:taskAffinity=".two" />
+
+        <activity android:name=".AffinitySingleTop"
+                  android:launchMode="singleTop"
+                  android:taskAffinity=".two" />
+
+        <activity android:name=".AffinityStandard"
+                  android:launchMode="standard"
+                  android:taskAffinity=".two" />
+    </application>
+
+</manifest>

@@ -2,10 +2,11 @@ import com.android.build.gradle.AppPlugin
 import proguard.gradle.ProGuardTask
 
 apply plugin: 'com.android.application'
+apply from: 'config.gradle'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         applicationId "org.chaos.demo.jar"
@@ -16,14 +17,15 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            zipAlignEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 //dependsOn 可根据实际需要增加或更改

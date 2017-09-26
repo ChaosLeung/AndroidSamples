@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BottomBarDemo</string>
+
+    <string name="nav_home">最新资讯</string>
+    <string name="nav_rank">今日排行</string>
+    <string name="nav_hot_articles">本月热门</string>
+    <string name="nav_hot_comments">精彩评论</string>
+    <string name="nav_help">帮助 &amp; 反馈</string>
+    <string name="nav_settings">设置</string>
+</resources>

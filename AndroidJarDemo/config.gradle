@@ -1,0 +1,72 @@
+import java.text.SimpleDateFormat
+
+def versionCode() {// use commit count as versionCode
+    def cmd = 'git rev-list HEAD --count'
+    def versionCode = cmd.execute().text.trim()
+    if ("".equals(versionCode)) {
+        versionCode = "1"
+    }
+    versionCode.toInteger()
+}
+
+def versionName() {// get versionName by branch
+    def cmd = 'git rev-parse --abbrev-ref HEAD'
+    def branchName = cmd.execute().text.trim()
+
+    cmd = 'git rev-parse --short HEAD'
+    def hash = cmd.execute().text.trim()
+
+    def versionName
+    if (branchName.equals("master")) {
+        versionName = "${gitVersionTag()}(${hash})"
+    } else if (branchName.startsWith("release/")) {
+        versionName = "${branchName.substring('release/'.length(), branchName.length())}(${hash})"
+    } else {
+        def format = new SimpleDateFormat("YYMMddhhmm")
+        format.setTimeZone(TimeZone.getTimeZone("UTC"))
+        versionName = "DEV(${hash}-${format.format(new Date().getTime())})"
+    }
+
+    return versionName
+}
+
+def gitVersionTag() {// last git tag
+    def cmd = 'git describe --tags'
+//    def version = cmd.execute().text.trim()
+    def version = 'v0.1.1'
+
+    def pattern = "-(\\d+)-g"
+    def matcher = version =~ pattern
+
+    version = version.substring(1, matcher ? matcher.start() : version.length())
+
+    return version
+}
+
+android.applicationVariants.all { variant ->
+    variant.mergedFlavor.versionCode = versionCode()
+    variant.mergedFlavor.versionName = versionName()
+
+    def version = variant.versionName.substring(0, variant.versionName.indexOf('('))
+    if (!version.startsWith('DEV')) {
+        version = "v${version}"
+    }
+
+    if (variant.apkVariantData.signed) {
+
+        variant.outputs.each { output ->
+//            println variant.buildType.name
+//            println output.properties.each {println "$it.key -> $it.value"}
+                println output.outputFile
+                if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
+                    output.outputFile = file("${project.getBuildDir()}/outputs/apk" +
+                            "/${project.name}_${version}" +
+                            // don't add productFlavor in file name if no flavor define in project
+                            "${"".equals(variant.flavorName) ? "" : "_${variant.flavorName}"}" +
+                            // don't add buildType in file name if buildType is release
+                            "${"release".equals(variant.buildType.name) ? "" : "_${variant.buildType.name}"}.apk")
+                    println output.outputFile
+                }
+        }
+    }
+}

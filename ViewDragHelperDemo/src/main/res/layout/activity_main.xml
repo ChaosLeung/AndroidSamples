@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.chaos.demos.viewdraghelper.VDRelativeLayout
+    android:id="@+id/parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.chaos.demos.viewdraghelper.MainActivity">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="Hello World!"
+        android:background="#DD3F51B5"/>
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#ddFF1744"/>
+</org.chaos.demos.viewdraghelper.VDRelativeLayout>
